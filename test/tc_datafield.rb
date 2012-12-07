@@ -41,6 +41,17 @@ class TestField < Test::Unit::TestCase
         assert_not_equal(f1,f3)
     end
 
+    def test_square_brackets
+        f1 = MARC::DataField.new('100', '0', '1',
+             MARC::Subfield.new('a', 'Foo'),
+             MARC::Subfield.new('b', 'Bar') )
+        assert_equal(f1['a'], 'Foo')
+        f3 = MARC::DataField.new('100', '0', '1',
+             MARC::Subfield.new('a', 'Foo'),
+             MARC::Subfield.new('b', 'Bar') )
+        assert_equal(f3['9'], nil)
+    end
+
     def test_subfield_shorthand
         f  = MARC::DataField.new('100', '0', '1', ['a', 'Foo'], ['b', 'Bar'])
         assert_equal('100 01 $a Foo $b Bar ', f.to_s)
