@@ -45,11 +45,16 @@ class TestField < Test::Unit::TestCase
         f1 = MARC::DataField.new('100', '0', '1',
              MARC::Subfield.new('a', 'Foo'),
              MARC::Subfield.new('b', 'Bar') )
-        assert_equal(f1['a'], 'Foo')
+        assert_equal(f1['a'], ['Foo'])
+        f2 = MARC::DataField.new('100', '0', '1',
+             MARC::Subfield.new('a', 'Foo'),
+             MARC::Subfield.new('a', 'Buz'),
+             MARC::Subfield.new('b', 'Bar') )
+        assert_equal(f2['a'], ['Foo', 'Buz'])
         f3 = MARC::DataField.new('100', '0', '1',
              MARC::Subfield.new('a', 'Foo'),
              MARC::Subfield.new('b', 'Bar') )
-        assert_equal(f3['9'], nil)
+        assert_equal(f3['9'], [])
     end
 
     def test_subfield_shorthand
@@ -68,7 +73,7 @@ class TestField < Test::Unit::TestCase
     
     def test_lookup_shorthand
         f  = MARC::DataField.new('100', '0', '1', ['a', 'Foo'], ['b', 'Bar'])
-        assert_equal(f['b'], 'Bar')
+        assert_equal(f['b'][0], 'Bar')
     end
 
 end

@@ -46,8 +46,8 @@ class ReaderTest < Test::Unit::TestCase
       record = rec
     end
     assert_equal(1, count)
-    assert_equal('9780061317842', record['ISB']['a'])
-    assert_equal('1', record['LOC']['9'])
+    assert_equal('9780061317842', record['ISB']['a'][0])
+    assert_equal('1', record['LOC']['9'][0])
   end
 
   def test_bad_marc
@@ -65,7 +65,7 @@ class ReaderTest < Test::Unit::TestCase
     assert_equal(10, records.length)
 
     reader = MARC::Reader.new('test/batch.dat')
-    records = reader.find_all { |r| r['245']['a'] =~ /Perl/ }
+    records = reader.find_all { |r| r['245']['a'][0] =~ /Perl/ }
     assert_equal(10, records.length)
 
     reader = MARC::Reader.new('test/batch.dat')

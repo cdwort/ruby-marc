@@ -63,7 +63,7 @@ class TestRecord < Test::Unit::TestCase
 
     def test_lookup_shorthand
         r = get_record
-        assert_equal(r['100']['a'], 'Thomas, Dave')
+        assert_equal(r['100']['a'][0], 'Thomas, Dave')
     end
 
     def get_record
@@ -107,8 +107,8 @@ class TestRecord < Test::Unit::TestCase
       end      
       
       five_hundreds = r2.fields('500')
-      assert_equal(five_hundreds.first['a'], '"Contemporary blues" interpretations of previously released songs; written by Bob Dylan.')
-      assert_equal(five_hundreds.last['a'], 'Composer and program notes in container.')
+      assert_equal(five_hundreds.first['a'][0], '"Contemporary blues" interpretations of previously released songs; written by Bob Dylan.')
+      assert_equal(five_hundreds.last['a'][0], 'Composer and program notes in container.')
     end
 
 end

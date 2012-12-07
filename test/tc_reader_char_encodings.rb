@@ -26,9 +26,9 @@ if "".respond_to?(:encoding)
       
       assert_equal "UTF-8", record['245'].subfields.first.to_s.encoding.name
       assert_equal "UTF-8", record['245'].subfields.first.value.encoding.name
-      
-      assert_equal "UTF-8", record['245']['a'].encoding.name
-      assert record['245']['a'].start_with?("Photčhanānukrom")
+
+      assert_equal "UTF-8", record['245']['a'][0].encoding.name
+      assert record['245']['a'][0].start_with?("Photčhanānukrom")
     end
     
     # Test against multirecord just to be sure that works. 
@@ -190,8 +190,8 @@ if "".respond_to?(:encoding)
       end
       
       # it should have the unicode replacement char where the bad
-      # byte was. 
-      assert_match '=> ' +  "\uFFFD" + '( <=', record['245']['a']      
+      # byte was.
+      assert_match '=> ' +  "\uFFFD" + '( <=', record['245']['a'][0]
     end
     
     def test_bad_source_bytes_with_custom_replace
@@ -199,10 +199,10 @@ if "".respond_to?(:encoding)
         :external_encoding => "UTF-8", :invalid => :replace, :replace => '')
       
       record = reader.first
-      
-      # bad byte replaced with empty string, gone.     
-      assert_match '=> ( <=', record['245']['a']
-      
+
+      # bad byte replaced with empty string, gone.
+      assert_match '=> ( <=', record['245']['a'][0]
+
     end
     
     def test_default_internal_encoding      

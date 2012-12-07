@@ -143,9 +143,8 @@ module MARC
     #   subfield = field['a']
     
     def [](code)
-      subfield = self.find {|s| s.code == code}
-      return subfield.value if subfield
-      return
+      subfields = self.find_all {|s| s.code == code}
+      subfields.map( &:value )
     end
  
 

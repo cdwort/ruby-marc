@@ -45,7 +45,7 @@ class XMLTest < Test::Unit::TestCase
 
     reader = MARC::XMLReader.new(StringIO.new(xml), :parser=>parser)
     r2 = reader.entries[0]
-    assert_equal 'foo & bar & baz', r2['245']['a']    
+    assert_equal 'foo & bar & baz', r2['245']['a'][0]
   end
   
   def test_batch
@@ -94,8 +94,8 @@ class XMLTest < Test::Unit::TestCase
         record = rec
       end
       assert_equal(1, count)
-      assert_equal('9780061317842', record['ISB']['a'])
-      assert_equal('1', record['LOC']['9'])
+      assert_equal('9780061317842', record['ISB']['a'][0])
+      assert_equal('1', record['LOC']['9'][0])
     end
 
   def test_read_no_leading_zero_write_leading_zero
